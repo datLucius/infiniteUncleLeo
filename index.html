@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Jerry, Hello</title>
+  <link href="styles.css" type="text/css" rel="stylesheet" />
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      let leoWidth = 100;
+      let leoHeight = 100;
+      function hello() {
+        console.log('hello');
+      }
+      function sayName(name) {
+        console.log(name);
+      }
+      function uncleLeo(name) {
+        sayName(name);
+        setTimeout(hello, 1000);
+      }
+      function shrinkLeos() {
+        leoWidth /= 1.2;
+        leoHeight /= 1.2;
+        const leos = document.getElementsByClassName('leo');
+        for (i = 0; i < leos.length; i++) {
+          leos[i].setAttribute("width", `${leoWidth}%`);
+          leos[i].setAttribute("height", `${leoHeight}%`);
+        }
+      }
+      function newLeo() {
+        const leoImg = document.createElement("IMG");
+        leoImg.setAttribute("src", "leo.jpg");
+        leoImg.setAttribute("width", `${leoWidth}%`);
+        leoImg.setAttribute("height", `${leoHeight}%`);
+        leoImg.classList.add("leo");
+        leoImg.onclick = function(){ propogateLeos(); uncleLeo('jerry'); shrinkLeos(); };
+        document.body.append(leoImg);
+      }
+      function propogateLeos() {
+        const leoCount = document.getElementsByClassName('leo').length;
+        for (i = 0; i < leoCount; i++) {
+          newLeo();
+        }
+      }
+      newLeo();
+    });
+  </script>
+</head>
+<body>
+</body>
+</html>
